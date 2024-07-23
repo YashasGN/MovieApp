@@ -1,5 +1,4 @@
 import express from "express";
-// controllers
 import {
   createUser,
   loginUser,
@@ -9,7 +8,7 @@ import {
   updateCurrentUserProfile,
 } from "../controllers/userController.js";
 
-// middlewares
+
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();

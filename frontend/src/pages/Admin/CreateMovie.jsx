@@ -69,13 +69,7 @@ const CreateMovie = () => {
 
   const handleCreateMovie = async () => {
     try {
-      if (
-        !movieData.name ||
-        !movieData.year ||
-        !movieData.detail ||
-        !movieData.cast ||
-        !selectedImage
-      ) {
+      if (!movieData.name || !movieData.year || !movieData.detail || !movieData.cast) {
         toast.error("Please fill all required fields");
         return;
       }
@@ -95,26 +89,27 @@ const CreateMovie = () => {
           toast.error("Failed to upload image");
           return;
         }
-
-        await createMovie({
-          ...movieData,
-          image: uploadedImagePath,
-        });
-
-        navigate("/admin/movies-list");
-
-        setMovieData({
-          name: "",
-          year: 0,
-          detail: "",
-          cast: [],
-          ratings: 0,
-          image: null,
-          genre: "",
-        });
-
-        toast.success("Movie Added To Database");
       }
+
+      await createMovie({
+        ...movieData,
+        image: uploadedImagePath,
+      });
+
+      navigate("/admin/movies-list");
+
+      setMovieData({
+        name: "",
+        year: 0,
+        detail: "",
+        cast: [],
+        ratings: 0,
+        image: null,
+        genre: "",
+      });
+
+      toast.success("Movie Added To Database");
+
     } catch (error) {
       console.error("Failed to create movie: ", createMovieErrorDetail);
       toast.error(`Failed to create movie: ${createMovieErrorDetail?.message}`);
@@ -201,15 +196,15 @@ const CreateMovie = () => {
             style={
               !selectedImage
                 ? {
-                    border: "1px solid #888",
-                    borderRadius: "5px",
-                    padding: "8px",
-                  }
+                  border: "1px solid #888",
+                  borderRadius: "5px",
+                  padding: "8px",
+                }
                 : {
-                    border: "0",
-                    borderRadius: "0",
-                    padding: "0",
-                  }
+                  border: "0",
+                  borderRadius: "0",
+                  padding: "0",
+                }
             }
           >
             {!selectedImage && "Upload Image"}
@@ -234,4 +229,5 @@ const CreateMovie = () => {
     </div>
   );
 };
+
 export default CreateMovie;
